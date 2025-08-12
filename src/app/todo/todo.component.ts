@@ -1,103 +1,109 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core'
 
-//for type safety
+// for type safety
 interface Task {
-  id: number
-  title: string
-  completed: boolean
+    id: number
+    title: string
+    completed: boolean
 }
 
 @Component({
-  selector: 'app-todo',
-  templateUrl: './todo.component.html',
-  styleUrls: ['./todo.component.css']
+    selector: 'app-todo',
+    templateUrl: './todo.component.html',
+    styleUrls: ['./todo.component.css'],
 })
 export class TodoComponent implements OnInit {
-  tasks: Task[] = []
-  newTask = ''
-  filter: 'all' | 'completed' | 'pending' = 'all'
+    tasks: Task[] = []
+    newTask = ''
+    filter: 'all' | 'completed' | 'pending' = 'all'
 
-  //for editing
-  editId: number | null = null
-  editText = ''
+    editId: number | null = null
+    editText = ''
+    searchText = ''
 
-  ngOnInit() {
-    this.loadTasks() //load tasks from local storage
-  }
-
-  get completedCount(): number {
-  return this.tasks.filter(t => t.completed).length
-  }
-
-  addTask() {
-    const title = this.newTask.trim()
-    if (!title) return //checks if the title is empty
-
-    this.tasks.push({ 
-      id: Date.now(), 
-      title, 
-      completed: false })
-
-    this.newTask = ''//reset
-    this.saveTasks()//saves to local storage
-  }
-
-  toggleCompletion(id: number) {
-    const task = this.tasks.find(t => t.id === id)
-    if (task) {
-      task.completed = !task.completed
-      this.saveTasks()
-    }
-  }
-
-  deleteTask(id: number) {
-    this.tasks = this.tasks.filter(t => t.id !== id)
-    this.saveTasks()
-  }
-
-  startEdit(task: Task) {
-    this.editId = task.id
-    this.editText = task.title
-  }
-
-  saveEdit() {
-    if (!this.editText.trim() || this.editId === null) { // cancel edit if editText is empty
-      this.cancelEdit()
-      return;
+    ngOnInit() {
+        this.loadTasks() // load tasks from local storage
     }
 
-    const task = this.tasks.find(t => t.id === this.editId)//update the first task w the sameid
-    if (task) task.title = this.editText.trim()
+    //searching
+    filteredTasks(): Task[] {
+        if (!this.searchText.trim()) return this.tasks
+        const lowerSearch = this.searchText.toLowerCase()
+        return this.tasks.filter((task) => task.title.toLowerCase().includes(lowerSearch)
+        )
+    }
 
-    this.cancelEdit();//reset
-    this.saveTasks();//save
-  }
+    pendingTasks(): Task[] {
+        //return this.tasks.filter((t) => !t.completed)
+        return this.filteredTasks().filter((t) => !t.completed)
+    }
 
-  cancelEdit() {
-    this.editId = null
-    this.editText = ''
-  }
+    completedTasks(): Task[] {
+        return this.filteredTasks().filter((t) => t.completed)
+    }
 
-  changeFilter(to: 'all' | 'completed' | 'pending') {
-    this.filter = to
-  }
 
-  get filteredTasks() {
-    if (this.filter === 'all') return this.tasks//all
-    if (this.filter === 'completed') return this.tasks.filter(t => t.completed)//completed
-    return this.tasks.filter(t => !t.completed)//pending
-  }
+    //prev
+    completedCount(): number {
+        return this.tasks.filter((t) => t.completed).length
+    }
 
-  trackById(index: number, task: Task) {
-    return task.id
-  }
+    addTask() {
+        const title = this.newTask.trim()
+        if (!title) return
 
-  private saveTasks() {
-    localStorage.setItem('todo_tasks', JSON.stringify(this.tasks)) //converts arr to json
-  }
+        this.tasks.push({
+            id: Date.now(),
+            title,
+            completed: false,
+        })
 
-  private loadTasks() {
-    const saved = localStorage.getItem('todo_tasks')
-    if (saved) this.tasks = JSON.parse(saved)//json back to arr
-  }
+        this.newTask = ''
+        this.saveTasks()
+    }
+
+    toggleCompletion(id: number) {
+        const task = this.tasks.find((t) => t.id === id)
+        if (task) {
+            task.completed = !task.completed
+            this.saveTasks()
+        }
+    }
+
+    deleteTask(id: number) {
+        this.tasks = this.tasks.filter((t) => t.id !== id)
+        this.saveTasks()
+    }
+
+    startEdit(task: Task) {
+        this.editId = task.id
+        this.editText = task.title
+    }
+
+    saveEdit() {
+        if (!this.editText.trim() || this.editId === null) {
+            this.cancelEdit()
+            return
+        }
+
+        const task = this.tasks.find((t) => t.id === this.editId)
+        if (task) task.title = this.editText.trim()
+
+        this.cancelEdit()
+        this.saveTasks()
+    }
+
+    cancelEdit() {
+        this.editId = null
+        this.editText = ''
+    }
+
+    private saveTasks() {
+        localStorage.setItem('todo_tasks', JSON.stringify(this.tasks))
+    }
+
+    private loadTasks() {
+        const saved = localStorage.getItem('todo_tasks')
+        if (saved) this.tasks = JSON.parse(saved)
+    }
 }

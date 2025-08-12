@@ -1,102 +1,171 @@
-/* Page Layout */
-.page {
+/* Center entire app vertically and horizontally */
+.app-container {
     min-height: 100vh;
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    background: #f6f8fa;
+    background: #f4f4f4;
     padding: 20px;
+    box-sizing: border-box;
+    font-family: Arial, sans-serif;
+    gap: 20px;
+    text-align: center;
+}
+
+.app-heading {
+    font-size: 3rem;
+    color: #333;
+    margin: 0;
+}
+
+/* Flex container for Add Task and Search side by side */
+.top-controls {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+    flex-wrap: wrap;
+    /* Responsive stack on smaller screens */
+    width: 100%;
+    max-width: 700px;
+    margin-bottom: 20px;
+}
+
+/* Add task input + button container */
+.add-task-container {
+    display: flex;
+    gap: 10px;
+    flex-grow: 1;
+    min-width: 250px;
+}
+
+.add-task-container input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    font-size: 1rem;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
     box-sizing: border-box;
 }
 
-.card {
-    width: 100%;
-    max-width: 720px;
-    background: white;
-    padding: 20px;
-    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
-    border-radius: 10px;
-}
-
-/* Add Row */
-.add-row {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 12px;
-}
-
-.add-row input {
-    flex: 1;
-    padding: 8px 10px;
-    font-size: 16px;
-    border: 1px solid #ddd;
+.add-task-container button {
+    padding: 10px 20px;
+    font-size: 1rem;
     border-radius: 6px;
-}
-
-button {
-    padding: 8px 10px;
-    cursor: pointer;
     border: none;
-    background: #2f80ed;
+    background-color: #28a745;
     color: white;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.add-task-container button:hover {
+    background-color: #1e7e34;
+}
+
+/* Search input styling */
+.search-input {
+    flex-grow: 1;
+    min-width: 250px;
+    padding: 10px 15px;
+    font-size: 1rem;
     border-radius: 6px;
+    border: 1px solid #ccc;
+    outline: none;
+    box-sizing: border-box;
 }
 
-button:hover {
-    opacity: 0.95;
+/* Container for the two lists side-by-side */
+.lists-container {
+    display: flex;
+    gap: 20px;
+    margin-top: 10px;
+    max-width: 800px;
+    width: 100%;
+    justify-content: center;
 }
 
-/* Filters */
-.filters {
-    margin-bottom: 8px;
+/* Each list section style */
+.list-section {
+    flex: 1;
+    background: #fff;
+    padding: 15px;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+    max-height: 400px;
+    overflow-y: auto;
+    text-align: left;
 }
 
-.filters button {
-    margin-right: 6px;
-    opacity: 0.8;
-    background: transparent;
-    color: #333;
-    border: 1px solid transparent;
+/* Headings for each section */
+.list-section h2 {
+    background: #333;
+    color: white;
+    padding: 8px;
+    margin-top: 0;
+    border-radius: 4px;
+    text-align: center;
 }
 
-.filters button.active {
-    font-weight: 700;
-    opacity: 1;
-    background: #eef6ff;
-    border-color: #d6e9ff;
+/* Remove bullet points from the lists */
+.list-section ul {
+    list-style-type: none !important;
+    margin: 0;
+    padding-left: 0;
 }
 
-/* List */
-.list {
-    list-style: none;
-    padding: 0;
-    margin: 8px 0;
-}
-
-.list li {
+/* List items as flex row */
+.list-section li {
     display: flex;
     align-items: center;
     gap: 10px;
-    padding: 8px 6px;
+    padding: 6px 0;
     border-bottom: 1px solid #eee;
 }
 
-.list li .title {
-    flex: 1;
+/* Make sure list items have no bullet */
+.list-section li {
+    list-style-type: none;
 }
 
-.list li .actions {
+/* Task title takes available space, no wrap */
+.title {
+    flex-grow: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+/* Edit input styling */
+.edit input {
+    width: 100%;
+    padding: 5px;
+    font-size: 1rem;
+}
+
+/* Actions container aligns buttons horizontally */
+.actions {
     display: flex;
-    gap: 6px;
+    gap: 8px;
+}
+.actions button {
+    padding: 4px 10px;
+    font-size: 0.9rem;
+    cursor: pointer;
+    border: none;
+    background-color: #28a745;
+    /* Green like Add Task */
+    color: white;
+    border-radius: 4px;
+    transition: background-color 0.2s ease;
 }
 
-.list li.completed .title {
+.actions button:hover {
+    background-color: #1e7e34;
+}
+
+.completed .title {
     text-decoration: line-through;
     color: #888;
-}
-
-/* Empty Message */
-.empty {
-    color: #666;
-    margin-top: 12px;
 }
