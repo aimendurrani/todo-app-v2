@@ -25,7 +25,6 @@
     gap: 20px;
     justify-content: center;
     flex-wrap: wrap;
-    /* Responsive stack on smaller screens */
     width: 100%;
     max-width: 700px;
     margin-bottom: 20px;
@@ -149,13 +148,13 @@
     display: flex;
     gap: 8px;
 }
+
 .actions button {
     padding: 4px 10px;
     font-size: 0.9rem;
     cursor: pointer;
     border: none;
     background-color: #28a745;
-    /* Green like Add Task */
     color: white;
     border-radius: 4px;
     transition: background-color 0.2s ease;
@@ -168,4 +167,60 @@
 .completed .title {
     text-decoration: line-through;
     color: #888;
+}
+
+/* ====== Responsive Styles ====== */
+
+/* For tablets and smaller screens */
+@media (max-width: 768px) {
+    .app-heading {
+        font-size: 2.2rem;
+    }
+
+    .top-controls {
+        flex-direction: column;
+        align-items: stretch;
+    }
+
+    .add-task-container,
+    .search-input {
+        min-width: 100%;
+    }
+
+    .lists-container {
+        flex-direction: column;
+        max-width: 100%;
+    }
+
+    .list-section {
+        max-height: none;
+        margin-bottom: 20px;
+    }
+
+    .title {
+        white-space: normal;
+    }
+}
+
+/* For mobile phones */
+@media (max-width: 480px) {
+    .app-heading {
+        font-size: 1.8rem;
+    }
+
+    .add-task-container button,
+    .actions button {
+        padding: 8px 12px;
+        font-size: 0.85rem;
+    }
+
+    .add-task-container input,
+    .search-input {
+        font-size: 0.9rem;
+        padding: 8px 12px;
+    }
+
+    .actions {
+        gap: 6px;
+    }
 }
