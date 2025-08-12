@@ -1,0 +1,48 @@
+<div class="page">
+    <div class="card">
+        <h1>To-Do App</h1>
+
+        <!-- Add new task -->
+        <div class="add-row">
+            <input [(ngModel)]="newTask" (keyup.enter)="addTask()" placeholder="Add new task" />
+            <button (click)="addTask()">Add</button>
+        </div>
+
+        <!-- Filters (class binding)-->
+        <div class="filters">
+            <button [class.active]="filter === 'all'" (click)="changeFilter('all')">All</button>
+            <button [class.active]="filter === 'pending'" (click)="changeFilter('pending')">Pending</button>
+            <button [class.active]="filter === 'completed'" (click)="changeFilter('completed')">Completed</button>
+        </div>
+
+        <!-- task count -->
+        <p class="counts">
+            Total: {{ tasks.length }} |
+            Completed: {{ completedCount }}
+        </p>
+
+        <!-- task List -->
+        <ul class="list">
+            <li *ngFor="let task of filteredTasks; trackBy: trackById" [class.completed]="task.completed">
+                <input type="checkbox" [checked]="task.completed" (change)="toggleCompletion(task.id)" />
+
+                <!-- View -->
+                <span *ngIf="editId !== task.id" class="title">{{ task.title }}</span>
+
+                <!-- Edit  -->
+                <span *ngIf="editId === task.id" class="edit">
+                    <input [(ngModel)]="editText" (keyup.enter)="saveEdit()" />
+                    <button (click)="saveEdit()">Save</button>
+                    <button (click)="cancelEdit()">Cancel</button>
+                </span>
+
+                <!-- edit/del buttons -->
+                <div class="actions" *ngIf="editId !== task.id">
+                    <button (click)="startEdit(task)">Edit</button>
+                    <button (click)="deleteTask(task.id)">Delete</button>
+                </div>
+            </li>
+        </ul>
+        <p *ngIf="tasks.length === 0" class="empty">No tasks yet — add one above!</p>
+    </div>
+</div>
