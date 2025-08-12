@@ -22,7 +22,7 @@ A simple and user-friendly Todo application built with Angular. This app helps y
 
 ## Demo
 
-\[Insert your live deployment link here]
+\[https://todo-app-v2-gilt.vercel.app/]
 
 ---
 
