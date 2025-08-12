@@ -1,27 +1,101 @@
-# TodoApp
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 15.2.11.
+# Todo App in Angular (v2)
 
-## Development server
+A simple and user-friendly Todo application built with Angular. This app helps you manage your daily tasks with ease by allowing you to add new tasks, edit existing ones, mark tasks as completed or pending, and search/filter through your list. Tasks are saved in your browser’s local storage, so your data persists between sessions.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+**This is version 2 of my Todo app. You can check out the previous version [here](https://github.com/aimendurrani/Todo-App).**
 
-## Code scaffolding
+---
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+## Features
 
-## Build
+* Add new tasks with a title
+* Edit existing tasks
+* Delete tasks you no longer need
+* Mark tasks as completed or pending
+* Filter tasks by status: All, Completed, or Pending
+* Search tasks by keyword
+* Persistent storage using localStorage
+* Responsive and clean UI
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+---
 
-## Running unit tests
+## Demo
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+\[Insert your live deployment link here]
 
-## Running end-to-end tests
+---
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+## Installation
 
-## Further help
+1. Clone the repository
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+```bash
+git clone https://github.com/aimendurrani/todo-app-v2.git  
+```
+
+2. Navigate into the project folder
+
+```bash
+cd todo-app-v2  
+```
+
+3. Install dependencies
+
+```bash
+npm install  
+```
+
+4. Run the development server
+
+```bash
+ng serve  
+```
+
+5. Open your browser at `http://localhost:4200` to see the app in action
+
+---
+
+## Usage
+
+* Use the input box and the “Add Task” button to create new tasks.
+* Click the checkbox next to each task to toggle its completion status.
+* Click “Edit” to modify the task title and “Save” to confirm changes.
+* Use the search box to filter tasks by title keywords.
+* Tasks are grouped into Pending and Completed sections for easy viewing.
+
+---
+
+## Technologies Used
+
+* Angular
+* TypeScript
+* HTML & CSS
+* LocalStorage API
+
+---
+
+## Concepts Covered
+
+* **Angular Components & Data Binding** — Building UI with components, using property and event binding (`[(ngModel)]`, `(click)`) for interaction.
+* **TypeScript Interfaces** — Defining `Task` interface for better type safety and code clarity.
+* **Component Lifecycle** — Using `ngOnInit` to initialize data when the component loads.
+* **Filtering and Searching** — Using JavaScript array methods like `filter` and `includes` to implement search and filter functionality.
+* **Conditional Rendering** — Displaying or hiding elements dynamically with Angular directives such as `*ngIf` and `*ngFor`.
+* **Local Storage** — Saving tasks in browser storage so data persists across page refreshes.
+* **State Management** — Managing app state via variables for tasks, editing, and user input.
+* **Event Handling** — Responding to user actions like clicks and key presses to update the task list.
+
+---
+
+## Contributing
+
+Contributions are welcome! Feel free to fork the repo and submit pull requests for improvements or bug fixes.
+
+---
+
+## License
+
+MIT License
+
+---
